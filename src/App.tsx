@@ -1,7 +1,12 @@
 import "./App.css";
+import Square from "./components/Square";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <Square value={2} />
+    </>
+  );
 }
 
 export default App;
