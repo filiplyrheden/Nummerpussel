@@ -1,18 +1,14 @@
 import Square from "./Square";
 import "./Board.css";
-import { shuffleArray } from "../utils/shuffle";
 
-export default function Board() {
-  const totalSquares = 3 * 5;
-  const square = Array.from({ length: totalSquares }, (_, i) =>
-    i === totalSquares - 1 ? null : i + 1
-  );
+interface BoardProps {
+  squares: (number | null)[];
+}
 
-  const shuffledSquares = shuffleArray(square);
-
+export default function Board({ squares }: BoardProps) {
   return (
     <div className="board" style={{ gridTemplateColumns: `repeat(5, 64px)` }}>
-      {shuffledSquares.map((square, i) => (
+      {squares.map((square, i) => (
         <Square key={i} value={square} />
       ))}
     </div>
