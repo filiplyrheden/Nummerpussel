@@ -2,8 +2,10 @@ import "./App.css";
 import Board from "./components/Board";
 import { shuffleArray } from "./utils/shuffle";
 import { useState } from "react";
+import { cols } from "../src/config";
+import { rows } from "../src/config";
 
-const totalSquares = 3 * 5;
+const totalSquares = rows * cols;
 
 const shuffledSquares = () => {
   const squares = Array.from({ length: totalSquares }, (_, i) =>
