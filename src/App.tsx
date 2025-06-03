@@ -73,6 +73,7 @@ function App() {
 
   return (
     <>
+      <h1>Filips supersvåra nummerpussel</h1>
       <Board squares={squares} onClick={handleClick} />
       <button onClick={reshuffle}>Slumpa</button>
       {isWinner && (
