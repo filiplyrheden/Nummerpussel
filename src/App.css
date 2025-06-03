@@ -20,6 +20,11 @@ button:hover {
   background-color: #1e40af;
 }
 
+.win-message {
+  font-size: 1.5rem;
+  margin-top: 3rem;
+}
+
 .open-sans {
   font-family: "Open Sans", sans-serif;
   font-optical-sizing: auto;
