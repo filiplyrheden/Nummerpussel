@@ -48,22 +48,38 @@ function moveIfPossible(
   return squares;
 }
 
+function isSolved(squares: (number | null)[]): boolean {
+  for (let i = 0; i < squares.length - 1; i++) {
+    if (squares[i] !== i + 1) return false;
+  }
+  return squares[squares.length - 1] === null;
+}
+
 function App() {
   const [squares, setSquares] = useState<(number | null)[]>(shuffledSquares);
+  const [isWinner, setIsWinner] = useState(false);
 
   const reshuffle = () => {
-    setSquares(shuffledSquares());
+    const fresh = shuffledSquares();
+    setSquares(fresh);
+    setIsWinner(isSolved(fresh));
   };
 
   const handleClick = (index: number) => {
     const newSquares = moveIfPossible(squares, cols, index);
     setSquares(newSquares);
+    setIsWinner(isSolved(newSquares));
   };
 
   return (
     <>
       <Board squares={squares} onClick={handleClick} />
       <button onClick={reshuffle}>Slumpa</button>
+      {isWinner && (
+        <p className="win-message">
+          Snyggt jobbat! Du löste det supersvåra pusslet!
+        </p>
+      )}
     </>
   );
 }
