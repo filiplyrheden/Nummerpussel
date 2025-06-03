@@ -2,8 +2,7 @@ import "./App.css";
 import Board from "./components/Board";
 import { shuffleArray } from "./utils/shuffle";
 import { useState } from "react";
-import { cols } from "../src/config";
-import { rows } from "../src/config";
+import { cols, rows } from "../src/config";
 
 const totalSquares = rows * cols;
 
@@ -37,7 +36,7 @@ function moveIfPossible(
     for (let i = end - 1; i !== start - dir; i -= dir) {
       newSquares[rowEmpty * cols + i] = newSquares[rowEmpty * cols + i - dir];
     }
-    newSquares[clickedIndex] = null;
+    newSquares[rowEmpty * cols + start] = null;
     return newSquares;
   }
 
@@ -51,7 +50,7 @@ function moveIfPossible(
     for (let i = end - 1; i !== start - dir; i -= dir) {
       newSquares[i * cols + colEmpty] = newSquares[(i - dir) * cols + colEmpty];
     }
-    newSquares[clickedIndex] = null;
+    newSquares[start * cols + colEmpty] = null;
     return newSquares;
   }
 
@@ -66,7 +65,7 @@ function App() {
   };
 
   const handleClick = (index: number) => {
-    const newSquares = moveIfPossible(squares, 5, index);
+    const newSquares = moveIfPossible(squares, cols, index);
     setSquares(newSquares);
   };
 
