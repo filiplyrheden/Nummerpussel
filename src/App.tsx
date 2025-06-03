@@ -19,6 +19,7 @@ function moveIfPossible(
   clickedIndex: number
 ): (number | null)[] {
   const emptyIndex = squares.indexOf(null);
+
   const rowClicked = Math.floor(clickedIndex / cols);
   const colClicked = clickedIndex % cols;
   const rowEmpty = Math.floor(emptyIndex / cols);
@@ -27,30 +28,20 @@ function moveIfPossible(
   const newSquares = [...squares];
 
   if (rowClicked === rowEmpty) {
-    const [start, end] =
-      colClicked < colEmpty
-        ? [colClicked, colEmpty]
-        : [colEmpty + 1, colClicked + 1];
     const dir = colClicked < colEmpty ? 1 : -1;
-
-    for (let i = end - 1; i !== start - dir; i -= dir) {
-      newSquares[rowEmpty * cols + i] = newSquares[rowEmpty * cols + i - dir];
+    for (let i = emptyIndex; i !== clickedIndex; i -= dir) {
+      newSquares[i] = newSquares[i - dir];
     }
-    newSquares[rowEmpty * cols + start] = null;
+    newSquares[clickedIndex] = null;
     return newSquares;
   }
 
   if (colClicked === colEmpty) {
-    const [start, end] =
-      rowClicked < rowEmpty
-        ? [rowClicked, rowEmpty]
-        : [rowEmpty + 1, rowClicked + 1];
     const dir = rowClicked < rowEmpty ? 1 : -1;
-
-    for (let i = end - 1; i !== start - dir; i -= dir) {
-      newSquares[i * cols + colEmpty] = newSquares[(i - dir) * cols + colEmpty];
+    for (let i = emptyIndex; i !== clickedIndex; i -= dir * cols) {
+      newSquares[i] = newSquares[i - dir * cols];
     }
-    newSquares[start * cols + colEmpty] = null;
+    newSquares[clickedIndex] = null;
     return newSquares;
   }
 
